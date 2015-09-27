@@ -1,12 +1,11 @@
 package com.pkozikowski.fifascores
 
 import akka.actor.ActorSystem
-import akka.stream.ActorMaterializer
 import akka.http.scaladsl.Http
-import akka.http.scaladsl.server.Directives._
 import akka.http.scaladsl.marshallers.sprayjson.SprayJsonSupport._
-import akka.http.scaladsl.marshalling.ToResponseMarshallable
-import spray.json.DefaultJsonProtocol._
+import akka.http.scaladsl.server.Directives._
+import akka.stream.ActorMaterializer
+import com.typesafe.config.ConfigFactory
 import spray.json._
 
 case class HelloObject(hello: String)
@@ -28,9 +27,16 @@ object Main extends App with Protocols {
         }
       }
     }
-  }
+  } ~
+    getFromResourceDirectory("webapp") ~
+    path("") {
+      getFromResource("webapp/index.html")
+    }
 
-  val bindingFuture = Http().bindAndHandle(route, "localhost", 8080)
+  lazy val serverHost: String = ConfigFactory.load().getString("server.host")
+  lazy val serverPort: Int = ConfigFactory.load().getInt("server.port")
 
-  println(s"Server online at http://localhost:8080/\nPress RETURN to stop...")
+  val bindingFuture = Http().bindAndHandle(route, serverHost, serverPort)
+
+  println(s"Server online at http://$serverHost:$serverPort/\nPress RETURN to stop...")
 }

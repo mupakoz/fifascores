@@ -34,6 +34,15 @@ def haltOnCmdResultError(result: Int) {
   }
 }
 
+def gulpTask(taskName: String) = (baseDirectory, streams) map { (bd, s) =>
+  val localGulpCommand =  (bd / ".." / "frontend" / "node_modules" / ".bin" / "gulp.cmd").toString() + " " + taskName
+  def buildGulp() = {
+    Process(localGulpCommand, bd / ".." / "frontend").!
+  }
+  println("Building with Gulp.js : " + taskName)
+  haltOnCmdResultError(buildGulp())
+}
+
 lazy val rootProject = (project in file("."))
   .settings(commonSettings: _*)
   .aggregate(backend)
@@ -41,8 +50,17 @@ lazy val rootProject = (project in file("."))
 lazy val backend: Project = (project in file("backend"))
   .settings(commonSettings)
   .settings(Revolver.settings)
+  .settings(DeployToHeroku.settings)
   .settings(
-    libraryDependencies ++= libraries
+    libraryDependencies ++= libraries,
+    unmanagedResourceDirectories in Compile := {
+      (unmanagedResourceDirectories in Compile).value ++ List(baseDirectory.value.getParentFile / frontend.base.getName / "dist")
+    },
+    assemblyJarName in assembly := "fifascores.jar",
+    assembly <<= assembly dependsOn gulpTask("build")
   )
+
+lazy val frontend = (project in file("frontend"))
+  .settings(commonSettings: _*)
 
 Revolver.settings
