@@ -3,10 +3,16 @@ export function routerConfig($stateProvider: ng.ui.IStateProvider, $urlRouterPro
   $stateProvider
     .state('home', {
       url: '/',
-      templateUrl: 'app/main/main.html',
-      controller: 'MainController',
-      controllerAs: 'main'
-    });
+      templateUrl: 'app/home/home.html',
+      controller: 'HomeController',
+      controllerAs: 'home'
+    })
+      .state('scores', {
+        url: '/scores',
+        templateUrl: 'app/scores/scores.html',
+        controller: 'ScoresController',
+        controllerAs: 'scores'
+      });
 
   $urlRouterProvider.otherwise('/');
 }
