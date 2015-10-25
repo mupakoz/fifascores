@@ -6,18 +6,22 @@ import { runBlock } from './index.run';
 import { MainController } from './main/main.controller';
 import { HomeController } from './home/home.controller';
 import { ScoresController } from './scores/scores.controller';
+import { AddScoreController } from './scores/add/addScore.controller';
+import { ScoresService } from './scores/scores.service';
 
-declare var moment: moment.MomentStatic;
+declare var moment:moment.MomentStatic;
 
-module frontend {
-  'use strict';
 
-  angular.module('frontend', ['ngAnimate', 'ngCookies', 'ngTouch', 'ngSanitize', 'ngMessages', 'ngAria', 'ngResource', 'ui.router', 'ngMaterial', 'toastr'])
+'use strict';
+
+export var frontend:ng.IModule = angular.module('frontend', ['ngAnimate', 'ngCookies', 'ngTouch', 'ngSanitize', 'ngMessages', 'ngAria', 'ngResource', 'ui.router', 'ngMaterial', 'toastr', 'ngTable'])
     .constant('moment', moment)
     .config(config)
     .config(routerConfig)
     .run(runBlock)
     .controller('MainController', MainController)
     .controller('HomeController', HomeController)
-    .controller('ScoresController', ScoresController);
-}
+    .controller('ScoresController', ScoresController)
+    .controller('AddScoreController', AddScoreController)
+    .service('ScoresService', ScoresService);
+

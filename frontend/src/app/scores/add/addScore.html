@@ -1,0 +1,41 @@
+<md-toolbar layout="row" class="md-whiteframe-z1 site-content-toolbar">
+    <div class="md-toolbar-tools">
+        <md-button class="menu" hide-gt-sm ng-click="al.toggleList()" aria-label="Show menu">
+            <md-icon md-svg-icon="menu"></md-icon>
+        </md-button>
+        <h1>Dodaj wynik</h1>
+    </div>
+</md-toolbar>
+
+<md-content layout-padding>
+    <div layout layout-sm="column">
+        <md-input-container style="width:70%">
+            <label>Wynik (format NN-NN)</label>
+            <input ng-model="formData.score">
+        </md-input-container>
+        <md-datepicker ng-model="formData.date" md-placeholder="Enter date"></md-datepicker>
+    </div>
+    <div layout layout-sm="column">
+        <md-input-container flex>
+            <label>Nazwa pierwszej drużyny</label>
+            <input ng-model="formData.homeTeamName">
+        </md-input-container>
+        <md-input-container flex>
+            <label>Gracze (oddzieleni przecinkiem)</label>
+            <input ng-model="formData.homeTeamPlayers">
+        </md-input-container>
+    </div>
+    <div layout layout-sm="column">
+        <md-input-container flex>
+            <label>Nazwa drugiej drużyny</label>
+            <input ng-model="formData.guestTeamName">
+        </md-input-container>
+        <md-input-container flex>
+            <label>Gracze (oddzieleni przecinkiem)</label>
+            <input ng-model="formData.guestTeamPlayers">
+        </md-input-container>
+    </div>
+    <div layout layout-sm="column">
+        <md-button class="md-raised md-primary" data-ng-click="vm.addScore()" flex>Dodaj wynik</md-button>
+    </div>
+</md-content>

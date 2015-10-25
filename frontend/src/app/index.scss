@@ -39,7 +39,6 @@
 
 
 html, body {
-  font-family: 'Open Sans', sans-serif;
   font-size:14px;
   height:100%;
   margin: 0px;
@@ -187,5 +186,5 @@ span.name {
 }
 
 .white-bg {
-  background-color: #ffffff;
+  background-color: #ffffff !important;
 }
