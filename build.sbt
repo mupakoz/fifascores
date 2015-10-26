@@ -11,12 +11,14 @@ scalacOptions := Seq("-unchecked", "-deprecation", "-encoding", "utf8")
 lazy val libraries = {
   val akkaStreamV = "1.0"
   val scalaTestV  = "2.2.5"
+  val salatV = "1.9.9"
   Seq(
     "com.typesafe.akka" %% "akka-stream-experimental"             % akkaStreamV,
     "com.typesafe.akka" %% "akka-http-core-experimental"          % akkaStreamV,
     "com.typesafe.akka" %% "akka-http-experimental"               % akkaStreamV,
     "com.typesafe.akka" %% "akka-http-spray-json-experimental"    % akkaStreamV,
-    "org.scalatest"     %% "scalatest"                            % scalaTestV % "test"
+    "org.scalatest"     %% "scalatest"                            % scalaTestV % "test",
+    "com.novus"         %% "salat"                                % salatV
   )
 }
 

@@ -25,17 +25,26 @@ export class ScoresController {
                 private scoresService:Services.ScoresService,
                 private $location:ng.ILocationService) {
         $scope.vm = this;
+        var that = this;
 
-        $scope.data = scoresService.getAllScores();
+        scoresService.getAllScores().success(function (data) {
+            console.log('Data received:');
+            console.log(data);
+            that.$scope.data = data;
 
-        this.tableParams = new ngTableParams({
-            count: 50
-        }, {
-            data: $scope.data
+            that.tableParams = new ngTableParams({
+                count: 50
+            }, {
+                data: $scope.data
+            });
+        }).error(function () {
+            console.log('Error when receiving data!');
         });
+
+
     }
 
-    public addScore(): void {
+    public addScore():void {
         this.$location.path('/scores/add');
     }
 }

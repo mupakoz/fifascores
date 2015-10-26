@@ -1,11 +1,5 @@
-export class BasicPlayerDTO {
-    firstName:string;
-    lastName:string;
-    nickname:string;
-}
-
 export class TeamScoreDTO {
-    players:BasicPlayerDTO[];
+    players:string[];
     team:string;
     score:number;
 }
