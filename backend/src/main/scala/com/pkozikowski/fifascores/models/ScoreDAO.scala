@@ -6,12 +6,15 @@ import com.novus.salat.dao.SalatDAO
 import com.novus.salat.global._
 import com.typesafe.config.ConfigFactory
 
-class ScoreDAO extends SalatDAO[Score, ObjectId](collection= MongoConnection(uri = MongoURI(ConfigFactory.load().getString("mongodb.uri")))("fifascores")("scores"))
+
+
+class ScoreDAO extends SalatDAO[Score, ObjectId](collection = MongoConnection(uri = MongoURI(ConfigFactory.load().getString("mongodb.uri")))("heroku_q44s29r9")("scores") )
 
 object ScoreDAO {
+  val scoreDAO = new ScoreDAO
+
   def insert(newScore: NewScoreDTO) = scoreDAO.insert(newScore.toScore)
 
-  val scoreDAO = new ScoreDAO
   def all(): Seq[Score] = scoreDAO.find(MongoDBObject.empty).toList
   def allDtos(): Seq[ScoreDTO] = all().map(s => new ScoreDTO(s))
 }

@@ -5,6 +5,8 @@ import akka.http.scaladsl.Http
 import akka.http.scaladsl.marshallers.sprayjson.SprayJsonSupport._
 import akka.http.scaladsl.server.Directives._
 import akka.stream.ActorMaterializer
+import com.mongodb.casbah.Imports._
+import com.mongodb.casbah.MongoURI
 import com.pkozikowski.fifascores.models._
 import com.typesafe.config.ConfigFactory
 import spray.json._
@@ -52,8 +54,12 @@ object Main extends App with Protocols {
 
   lazy val serverHost: String = ConfigFactory.load().getString("server.host")
   lazy val serverPort: Int = ConfigFactory.load().getInt("server.port")
+  lazy val mongoUri: String = ConfigFactory.load().getString("mongodb.uri")
 
   val bindingFuture = Http().bindAndHandle(route, serverHost, serverPort)
 
+
+
+  println(s"Database at: " + mongoUri)
   println(s"Server online at http://$serverHost:$serverPort/\nPress RETURN to stop...")
 }
