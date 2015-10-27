@@ -25,7 +25,7 @@ export class MainController {
         $scope.menuItems = [
             { name: 'Wyniki', url: 'scores'},
             { name: 'Tabela', url: 'table'},
-            { name: 'Użytkownicy', url: 'users'}
+            { name: 'Gracze', url: 'players'}
         ];
         this.pickSelectedMenuItem();
     }

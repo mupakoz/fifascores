@@ -13,6 +13,11 @@ export function routerConfig($stateProvider:ng.ui.IStateProvider, $urlRouterProv
             controller: 'ScoresController',
             controllerAs: 'scores'
         })
+        .state('players', {
+            url: '/players',
+            templateUrl: 'app/players/players.html',
+            controller: 'PlayersController'
+        })
         .state('addScore', {
             url: '/scores/add',
             templateUrl: 'app/scores/add/addScore.html',
