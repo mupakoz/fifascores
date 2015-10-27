@@ -20,7 +20,9 @@ export class AddScoreController {
                 private scoresService:Services.ScoresService,
                 private $location:ng.ILocationService) {
         $scope.vm = this;
-        $scope.formData = {};
+        $scope.formData = {
+            date: new Date()
+        };
     }
 
     addScore():void {
