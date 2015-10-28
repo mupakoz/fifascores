@@ -8,7 +8,9 @@ import com.typesafe.config.ConfigFactory
 
 
 
-class ScoreDAO extends SalatDAO[Score, ObjectId](collection = MongoConnection(uri = MongoURI(ConfigFactory.load().getString("mongodb.uri")))("heroku_q44s29r9")("scores") )
+class ScoreDAO extends SalatDAO[Score, ObjectId](collection = MongoConnection(
+  uri = MongoURI(ConfigFactory.load().getString("mongodb.uri")))("heroku_q44s29r9")("scores")
+)
 
 object ScoreDAO {
   val scoreDAO = new ScoreDAO

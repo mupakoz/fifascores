@@ -5,8 +5,6 @@ import akka.http.scaladsl.Http
 import akka.http.scaladsl.marshallers.sprayjson.SprayJsonSupport._
 import akka.http.scaladsl.server.Directives._
 import akka.stream.ActorMaterializer
-import com.mongodb.casbah.Imports._
-import com.mongodb.casbah.MongoURI
 import com.pkozikowski.fifascores.models._
 import com.typesafe.config.ConfigFactory
 import spray.json._
@@ -18,6 +16,8 @@ trait Protocols extends DefaultJsonProtocol {
   implicit val newScoreDTOFormat = jsonFormat6(NewScoreDTO)
   implicit val teamScoreFormat = jsonFormat3(TeamScore)
   implicit val scoreFormat = jsonFormat3(ScoreDTO)
+  implicit val playerFormat = jsonFormat2(PlayerDTO)
+  implicit val newPlayerFormat = jsonFormat1(NewPlayerDTO)
 }
 
 object Main extends App with Protocols {
@@ -35,14 +35,26 @@ object Main extends App with Protocols {
       pathPrefix("scores") {
         path("add") {
           (post & entity(as[NewScoreDTO])) { newScore =>
-            println(s"New score: $newScore")
             ScoreDAO.insert(newScore)
-            complete(200, "OK")
+            complete(201, "OK")
           }
         } ~
+          get {
+            complete {
+              ScoreDAO.allDtos()
+            }
+          }
+      } ~
+      pathPrefix("players") {
         get {
           complete {
-            ScoreDAO.allDtos()
+            PlayerDAO.allDtos()
+          }
+        } ~
+        post {
+          entity(as[NewPlayerDTO]) { newPlayer =>
+            PlayerDAO.insert(newPlayer)
+            complete(201, "OK")
           }
         }
       }
@@ -57,7 +69,6 @@ object Main extends App with Protocols {
   lazy val mongoUri: String = ConfigFactory.load().getString("mongodb.uri")
 
   val bindingFuture = Http().bindAndHandle(route, serverHost, serverPort)
-
 
 
   println(s"Database at: " + mongoUri)
