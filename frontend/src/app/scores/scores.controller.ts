@@ -28,8 +28,6 @@ export class ScoresController {
         var that = this;
 
         scoresService.getAllScores().success(function (data) {
-            console.log('Data received:');
-            console.log(data);
             that.$scope.data = data;
 
             that.tableParams = new ngTableParams({

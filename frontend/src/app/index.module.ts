@@ -6,6 +6,7 @@ import { runBlock } from './index.run';
 import { MainController } from './main/main.controller';
 import { HomeController } from './home/home.controller';
 import { PlayersController } from './players/players.controller';
+import { PlayersService } from './players/players.service';
 import { ScoresController } from './scores/scores.controller';
 import { AddScoreController } from './scores/add/addScore.controller';
 import { ScoresService } from './scores/scores.service';
@@ -22,8 +23,9 @@ export var frontend:ng.IModule = angular.module('frontend', ['ngAnimate', 'ngCoo
     .run(runBlock)
     .controller('MainController', MainController)
     .controller('HomeController', HomeController)
-    .controller('ScoresController', ScoresController)
     .controller('PlayersController', PlayersController)
+    .service('PlayersService', PlayersService)
+    .controller('ScoresController', ScoresController)
     .controller('AddScoreController', AddScoreController)
     .service('ScoresService', ScoresService);
 

@@ -21,7 +21,12 @@ export class AddScoreController {
                 private $location:ng.ILocationService) {
         $scope.vm = this;
         $scope.formData = {
-            date: new Date()
+            date: new Date(),
+            score: undefined,
+            homeTeamPlayers: undefined,
+            homeTeamName: undefined,
+            guestTeamPlayers: undefined,
+            guestTeamName: undefined
         };
     }
 

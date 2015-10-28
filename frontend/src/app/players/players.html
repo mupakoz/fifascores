@@ -8,5 +8,8 @@
 </md-toolbar>
 
 <md-content flex id="content" >
-    Tutaj bedo gracze!
+    <md-list-item ng-repeat="player in players">
+        <p>{{ player.nickname }}</p>
+        <md-divider ng-if="!$last"></md-divider>
+    </md-list-item>
 </md-content>
