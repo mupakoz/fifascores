@@ -4,6 +4,7 @@ import Services = require('./players.service')
 export interface IPlayersScope extends ng.IScope {
     newPlayer: Model.NewPlayerDTO;
     players: Model.PlayerDTO[];
+    vm: PlayersController;
 }
 
 export class PlayersController {
@@ -14,12 +15,29 @@ export class PlayersController {
 
     constructor(private $scope:IPlayersScope,
     private playersService: Services.PlayersService) {
+        $scope.vm = this;
         var that: PlayersController = this;
 
-        playersService.getAllPlayers().success(function (data) {
+
+        this.reloadPlayers(that);
+    }
+
+    private reloadPlayers(that) {
+        that.playersService.getAllPlayers().success(function (data) {
             that.$scope.players = data;
         }).error(function () {
             console.log('Error when receiving data!');
+        });
+    }
+
+    addPlayer() {
+        var that = this;
+        var addPlayerPromise = this.playersService.addPlayer(this.$scope.newPlayer);
+        addPlayerPromise.success(function (data, status, headers, config) {
+            console.log('Player added!');
+            that.reloadPlayers(that);
+        }).error(function (data, status, headers, config) {
+            console.log('Error when adding player!');
         });
     }
 }

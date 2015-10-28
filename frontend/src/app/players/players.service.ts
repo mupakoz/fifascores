@@ -11,16 +11,11 @@ export class PlayersService {
 
     public addPlayer(dto:Model.NewPlayerDTO):void {
         var that = this;
-        this.$http({
+        return this.$http({
             url: '/api/players',
             method: "POST",
             data: JSON.stringify(dto),
             headers: {'Content-Type': 'application/json'}
-        }).success(function (data, status, headers, config) {
-            console.log('Player added!');
-            that.$location.path('/players');
-        }).error(function (data, status, headers, config) {
-            console.log('Error when adding player!');
         });
     }
 
@@ -28,6 +23,6 @@ export class PlayersService {
         return this.$http({
             url: '/api/players',
             method: "GET"
-        })
+        });
     }
 }

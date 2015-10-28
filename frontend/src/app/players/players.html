@@ -7,7 +7,17 @@
     </div>
 </md-toolbar>
 
-<md-content flex id="content" >
+<md-content layout-padding layout="row" layout-sm="column">
+    <md-input-container>
+        <label>Ksywa</label>
+        <input ng-model="newPlayer.nickname">
+    </md-input-container>
+    <md-input-container>
+        <md-button class="md-raised md-primary" data-ng-click="vm.addPlayer()">Dodaj</md-button>
+    </md-input-container>
+</md-content>
+
+<md-content flex>
     <md-list-item ng-repeat="player in players">
         <p>{{ player.nickname }}</p>
         <md-divider ng-if="!$last"></md-divider>
