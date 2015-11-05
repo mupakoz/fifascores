@@ -1,5 +1,7 @@
 package com.pkozikowski.fifascores
 
+import java.nio.charset.Charset
+
 import akka.actor.ActorSystem
 import akka.http.scaladsl.Http
 import akka.http.scaladsl.marshallers.sprayjson.SprayJsonSupport._
@@ -23,6 +25,8 @@ trait Protocols extends DefaultJsonProtocol {
 object Main extends App with Protocols {
   implicit val system = ActorSystem()
   implicit val materializer = ActorMaterializer()
+
+  val UTF8_CHARSET = Charset.forName("UTF-8");
 
   val route = pathPrefix("api") {
     path("hello") {
@@ -51,12 +55,15 @@ object Main extends App with Protocols {
             PlayerDAO.allDtos()
           }
         } ~
-        post {
-          entity(as[NewPlayerDTO]) { newPlayer =>
-            PlayerDAO.insert(newPlayer)
-            complete(201, "OK")
+          post {
+            entity(as[NewPlayerDTO]) { newPlayer =>
+              println("New player: " + newPlayer)
+              println("New player: " + newPlayer.nickname.getBytes.mkString(" "))
+              println("New player: Łysy")
+              PlayerDAO.insert(newPlayer)
+              complete(201, "OK")
+            }
           }
-        }
       }
   } ~
     getFromResourceDirectory("webapp") ~

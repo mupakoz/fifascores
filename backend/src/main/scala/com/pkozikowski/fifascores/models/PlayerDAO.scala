@@ -6,9 +6,7 @@ import com.novus.salat.dao.SalatDAO
 import com.typesafe.config.ConfigFactory
 import com.novus.salat.global._
 
-class PlayerDAO extends SalatDAO[Player, ObjectId](collection = MongoConnection(
-  uri = MongoURI(ConfigFactory.load().getString("mongodb.uri")))("heroku_q44s29r9")("players") 
-)
+class PlayerDAO extends SalatDAO[Player, ObjectId](collection = DBUtils.db("players"))
 
 object PlayerDAO {
   val playerDAO = new PlayerDAO
