@@ -63,6 +63,12 @@ object Main extends App with Protocols {
               PlayerDAO.insert(newPlayer)
               complete(201, "OK")
             }
+          } ~
+          path (Rest) { id =>
+            (delete) {
+              PlayerDAO.delete(id)
+              complete(200, "OK")
+            }
           }
       }
   } ~

@@ -13,4 +13,5 @@ object PlayerDAO {
   
   def insert(newPlayer: NewPlayerDTO) = playerDAO.insert(newPlayer.toPlayer)
   def allDtos(): Seq[PlayerDTO] = playerDAO.find(MongoDBObject.empty).map(s => new PlayerDTO(s)).toSeq
+  def delete(id: String) = playerDAO.removeById(new ObjectId(id))
 }
