@@ -17,7 +17,7 @@ trait Protocols extends DefaultJsonProtocol {
   implicit val ipInfoFormat = jsonFormat1(HelloObject)
   implicit val newScoreDTOFormat = jsonFormat6(NewScoreDTO)
   implicit val teamScoreFormat = jsonFormat3(TeamScore)
-  implicit val scoreFormat = jsonFormat3(ScoreDTO)
+  implicit val scoreFormat = jsonFormat4(ScoreDTO)
   implicit val playerFormat = jsonFormat2(PlayerDTO)
   implicit val newPlayerFormat = jsonFormat1(NewPlayerDTO)
 }
@@ -46,6 +46,12 @@ object Main extends App with Protocols {
           get {
             complete {
               ScoreDAO.allDtos()
+            }
+          } ~
+          path (Rest) { id =>
+            (delete) {
+              ScoreDAO.delete(id)
+              complete(200, "OK")
             }
           }
       } ~

@@ -27,22 +27,35 @@ export class ScoresController {
         $scope.vm = this;
         var that = this;
 
-        scoresService.getAllScores().success(function (data) {
-            that.$scope.data = data;
-
-            that.tableParams = new ngTableParams({
-                count: 50
-            }, {
-                data: $scope.data
-            });
-        }).error(function () {
-            console.log('Error when receiving data!');
-        });
-
-
+        this.reloadScores(this);
     }
 
     public addScore():void {
         this.$location.path('/scores/add');
+    }
+
+    public reloadScores(that: ScoresController): void {
+        that.scoresService.getAllScores().success(function (data) {
+            that.$scope.data = data;
+
+            that.tableParams = new that.ngTableParams({
+                count: 50
+            }, {
+                data: that.$scope.data
+            });
+        }).error(function () {
+            console.log('Error when receiving data!');
+        });
+    }
+
+    public delete(id: string): void {
+        var that = this;
+        var deleteScorePromise = this.scoresService.delete(id);
+        deleteScorePromise.success(function (data, status, headers, config) {
+            console.log('Score deleted!');
+            that.reloadScores(that);
+        }).error(function (data, status, headers, config) {
+            console.log('Error when deleting score!');
+        });
     }
 }

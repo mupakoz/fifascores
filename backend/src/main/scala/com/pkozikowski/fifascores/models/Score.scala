@@ -6,8 +6,8 @@ case class TeamScore(players: Seq[String], team: String, score: Int)
 
 case class Score(_id: ObjectId = new ObjectId, date: String, homeTeamScore: TeamScore, guestTeamScore: TeamScore)
 
-case class ScoreDTO(date: String, homeTeamScore: TeamScore, guestTeamScore: TeamScore) {
-  def this(score: Score) = this(score.date, score.homeTeamScore, score.guestTeamScore)
+case class ScoreDTO(id: String, date: String, homeTeamScore: TeamScore, guestTeamScore: TeamScore) {
+  def this(score: Score) = this(score._id.toString, score.date, score.homeTeamScore, score.guestTeamScore)
 }
 
 case class NewScoreDTO(score: String,

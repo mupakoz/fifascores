@@ -5,6 +5,7 @@ export class TeamScoreDTO {
 }
 
 export class MatchScoreDTO {
+    id: string;
     date:Date;
     homeTeamScore:TeamScoreDTO;
     guestTeamScore:TeamScoreDTO;

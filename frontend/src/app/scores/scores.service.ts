@@ -24,6 +24,13 @@ export class ScoresService {
         });
     }
 
+    public delete(id: string) {
+        return this.$http({
+            url: '/api/scores/' + id,
+            method: "DELETE"
+        })
+    }
+
     public
     getAllScores() {
         return this.$http({

@@ -17,4 +17,5 @@ object ScoreDAO {
 
   def all(): Seq[Score] = scoreDAO.find(MongoDBObject.empty).toList
   def allDtos(): Seq[ScoreDTO] = all().map(s => new ScoreDTO(s))
+  def delete(id: String) = scoreDAO.removeById(new ObjectId(id))
 }

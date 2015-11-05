@@ -30,6 +30,10 @@
             <td title="'Goście'" >
                 <span data-ng-repeat="player in matchData.guestTeamScore.players">{{player}}<span data-ng-if="!$last">,</span> </span>
             </td>
+
+            <td>
+                <md-button class="md-raised md-warn" data-ng-click="vm.delete(matchData.id)">Usuń</md-button>
+            </td>
         </tr>
     </table>
 </md-content>
