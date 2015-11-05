@@ -36,8 +36,20 @@ export class PlayersController {
         addPlayerPromise.success(function (data, status, headers, config) {
             console.log('Player added!');
             that.reloadPlayers(that);
+            that.$scope.newPlayer = {};
         }).error(function (data, status, headers, config) {
             console.log('Error when adding player!');
+        });
+    }
+
+    delete(id: string) {
+        var that = this;
+        var addPlayerPromise = this.playersService.delete(id);
+        addPlayerPromise.success(function (data, status, headers, config) {
+            console.log('Player deleted!');
+            that.reloadPlayers(that);
+        }).error(function (data, status, headers, config) {
+            console.log('Error when deleting player!');
         });
     }
 }

@@ -21,7 +21,10 @@
 
 <md-content flex>
     <md-list-item ng-repeat="player in players">
-        <p>{{ player.nickname }}</p>
+        <div layout="row">
+            <p>{{ player.nickname }}</p>
+            <md-button class="md-raised md-warn" data-ng-click="vm.delete(player.id)">Usuń</md-button>
+        </div>
         <md-divider></md-divider>
     </md-list-item>
 </md-content>

@@ -25,4 +25,11 @@ export class PlayersService {
             method: "GET"
         });
     }
+
+    public delete(id: string) {
+        return this.$http({
+            url: '/api/players/' + id,
+            method: "DELETE"
+        })
+    }
 }
