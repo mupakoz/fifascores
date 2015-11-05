@@ -25,3 +25,9 @@ export class AddScoreFormData {
     guestTeamPlayers: string;
     guestTeamName: string;
 }
+
+export class PlayersAutocomplete {
+    selectedItem: any;
+    searchText: string;
+
+}

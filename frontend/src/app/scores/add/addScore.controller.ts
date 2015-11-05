@@ -1,36 +1,67 @@
 import Model = require('./../scores.model')
 import Services = require('./../scores.service')
+import PlayersServices = require('./../../players/players.service')
+import PlayersModels = require('./../../players/players.model')
 
 export interface IAddScoreScope extends ng.IScope {
     vm: AddScoreController;
     formData: Model.AddScoreFormData;
+    guestPlayers: Model.PlayersAutocomplete;
 }
 
 export class AddScoreController {
 
     public tableParams:any;
+    public allPlayers:PlayersModels.PlayerDTO[];
 
     public static $inject = [
         '$scope',
         'ScoresService',
-        '$location'
+        '$location',
+        'PlayersService'
     ];
 
     constructor(private $scope:IAddScoreScope,
                 private scoresService:Services.ScoresService,
-                private $location:ng.ILocationService) {
+                private $location:ng.ILocationService,
+                private playersService:PlayersServices.PlayersService) {
         $scope.vm = this;
         $scope.formData = {
             date: new Date(),
             score: undefined,
-            homeTeamPlayers: undefined,
+            homeTeamPlayers: [],
             homeTeamName: undefined,
-            guestTeamPlayers: undefined,
+            guestTeamPlayers: [],
             guestTeamName: undefined
         };
+
+        var that:AddScoreController = this;
+        playersService.getAllPlayers().success(function (data:PlayerDTO[]) {
+            that.allPlayers = data;
+            console.log(data);
+        });
     }
 
     addScore():void {
+        console.log(this.allPlayers);
+        this.$scope.formData.homeTeamPlayers = _.map(this.$scope.formData.homeTeamPlayers, this.nicknameExtractor);
+        this.$scope.formData.guestTeamPlayers = _.map(this.$scope.formData.guestTeamPlayers, this.nicknameExtractor);
         this.scoresService.addScore(this.$scope.formData);
+    }
+
+    private nicknameExtractor(player: PlayersModels.PlayerDTO): string {
+        return player.nickname;
+    }
+
+    public querySearch(query:string):PlayersModels.PlayerDTO[] {
+        var results = query ? this.allPlayers.filter(this.createFilterFor(query)) : [];
+        return results;
+    }
+
+    private createFilterFor(query: string) {
+        var lowercaseQuery = angular.lowercase(query);
+        return function filterFn(player: PlayersModels.PlayerDTO) {
+            return (angular.lowercase(player.nickname).indexOf(lowercaseQuery) !== -1);
+        };
     }
 }

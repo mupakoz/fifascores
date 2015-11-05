@@ -13,16 +13,14 @@ case class ScoreDTO(id: String, date: String, homeTeamScore: TeamScore, guestTea
 case class NewScoreDTO(score: String,
                        date: String,
                        guestTeamName: String,
-                       guestTeamPlayers: String,
+                       guestTeamPlayers: Seq[String],
                        homeTeamName: String,
-                       homeTeamPlayers: String) {
+                       homeTeamPlayers: Seq[String]) {
   def toScore: Score = {
-    val homeTeamPlayersSeq = homeTeamPlayers.split(',')
-    val guestTeamPlayersSeq = guestTeamPlayers.split(',')
     val homeTeamScore = Integer.valueOf(score.split('-').head)
     val guestTeamScore = Integer.valueOf(score.split('-')(1))
     Score(date = date,
-      homeTeamScore = TeamScore(homeTeamPlayersSeq, homeTeamName, homeTeamScore),
-      guestTeamScore = TeamScore(guestTeamPlayersSeq, guestTeamName, guestTeamScore))
+      homeTeamScore = TeamScore(homeTeamPlayers, homeTeamName, homeTeamScore),
+      guestTeamScore = TeamScore(guestTeamPlayers, guestTeamName, guestTeamScore))
   }
 }

@@ -22,7 +22,21 @@
         </md-input-container>
         <md-input-container flex>
             <label>Gracze (oddzieleni przecinkiem)</label>
-            <input ng-model="formData.homeTeamPlayers">
+            <md-chips ng-model="formData.homeTeamPlayers" md-autocomplete-snap md-require-match="true">
+                <md-autocomplete
+                        md-selected-item="guestPlayers.selectedItem"
+                        md-search-text="guestPlayers.searchText"
+                        md-items="item in vm.querySearch(guestPlayers.searchText)"
+                        md-item-text="item.nickname"
+                        placeholder="Dodaj gracza">
+                    <span md-highlight-text="guestPlayers.searchText">{{item.nickname}}</span>
+                </md-autocomplete>
+                <md-chip-template>
+                    <span>
+                      {{$chip.nickname}}
+                    </span>
+                </md-chip-template>
+            </md-chips>
         </md-input-container>
     </div>
     <div layout layout-sm="column">
@@ -32,7 +46,21 @@
         </md-input-container>
         <md-input-container flex>
             <label>Gracze (oddzieleni przecinkiem)</label>
-            <input ng-model="formData.guestTeamPlayers">
+            <md-chips ng-model="formData.guestTeamPlayers" md-autocomplete-snap md-require-match="true">
+                <md-autocomplete
+                        md-selected-item="guestPlayers.selectedItem"
+                        md-search-text="guestPlayers.searchText"
+                        md-items="item in vm.querySearch(guestPlayers.searchText)"
+                        md-item-text="item.nickname"
+                        placeholder="Dodaj gracza">
+                    <span md-highlight-text="guestPlayers.searchText">{{item.nickname}}</span>
+                </md-autocomplete>
+                <md-chip-template>
+                    <span>
+                      {{$chip.nickname}}
+                    </span>
+                </md-chip-template>
+            </md-chips>
         </md-input-container>
     </div>
     <div layout layout-sm="column">
