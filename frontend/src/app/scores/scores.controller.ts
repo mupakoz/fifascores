@@ -8,6 +8,7 @@ export interface IScoresScope extends ng.IScope {
     vm: ScoresController;
     query: any;
     selectedRow: any;
+    paginationLabel: string;
 }
 
 export class ScoresController {
@@ -36,6 +37,8 @@ export class ScoresController {
         };
 
         $scope.selectedRow = [];
+
+        $scope.paginationLabel = { text: 'Wierszy na stronę:' };
     }
 
     public addScore():void {
