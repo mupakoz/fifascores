@@ -35,7 +35,7 @@ export class ScoresController {
 
         $scope.query = {
             filter: '',
-            order: 'date',
+            order: '-date',
             limit: 5,
             page: 1
         };
