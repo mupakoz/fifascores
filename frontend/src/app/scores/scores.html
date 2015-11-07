@@ -7,33 +7,31 @@
     </div>
 </md-toolbar>
 
-<md-content flex id="content" >
+<md-content flex>
     <md-button class="md-raised" data-ng-click="vm.addScore()">Dodaj wynik</md-button>
-
-    <table data-ng-table="vm.tableParams" class="table">
-        <tr data-ng-repeat="matchData in $data">
-            <td title="'Data'" data-filter="{ date: 'text'}" data-sortable="'date'">
-                {{matchData.date | date:'dd.MM.yyyy HH:mm'}}
-            </td>
-            <td title="'Gospodarze'">
-                <span data-ng-repeat="player in matchData.homeTeamScore.players">{{player}}<span data-ng-if="!$last">,</span> </span>
-            </td>
-            <td title="'Drużyna 1'">
-                {{matchData.homeTeamScore.team}}
-            </td>
-            <td title="'Wynik'">
-                {{matchData.homeTeamScore.score}}-{{matchData.guestTeamScore.score}}
-            </td>
-            <td title="'Drużyna 2'">
-                {{matchData.guestTeamScore.team}}
-            </td>
-            <td title="'Goście'" >
-                <span data-ng-repeat="player in matchData.guestTeamScore.players">{{player}}<span data-ng-if="!$last">,</span> </span>
-            </td>
-
-            <td>
-                <md-button class="md-raised md-warn" data-ng-click="vm.delete(matchData.id)">Usuń</md-button>
-            </td>
-        </tr>
-    </table>
+    <md-data-table-container>
+        <table class="md-primary" md-data-table>
+            <thead md-order="query.order">
+            <tr>
+                <th name="Data" order-by="date"></th>
+                <th name="Gospodarze"></th>
+                <th name="Drużyna 1"></th>
+                <th name="Wynik"></th>
+                <th name="Drużyna 2"></th>
+                <th name="Goście"></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr ng-repeat="matchData in data | orderBy: query.order | limitTo: query.limit: (query.page - 1) * query.limit">
+                <td>{{matchData.date | date:'dd.MM.yyyy HH:mm'}}</td>
+                <td><span data-ng-repeat="player in matchData.homeTeamScore.players">{{player}}<span data-ng-if="!$last">,</span> </span></td>
+                <td>{{matchData.homeTeamScore.team}}</td>
+                <td>{{matchData.homeTeamScore.score}}-{{matchData.guestTeamScore.score}}</td>
+                <td>{{matchData.guestTeamScore.team}}</td>
+                <td><span data-ng-repeat="player in matchData.guestTeamScore.players">{{player}}<span data-ng-if="!$last">,</span> </span></td>
+            </tr>
+            </tbody>
+        </table>
+    </md-data-table-container>
+    <md-data-table-pagination md-limit="query.limit" md-page="query.page" md-total="{{data.length}}"></md-data-table-pagination>
 </md-content>

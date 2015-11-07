@@ -4,9 +4,10 @@ import Services = require('./scores.service')
 export interface IScoresScope extends ng.IScope {
     data: Model.MatchScoreDTO[];
     fields: Model.TableField[];
-    tableParams: any;
     firstNameTest: string;
     vm: ScoresController;
+    query: any;
+    selectedRow: any;
 }
 
 export class ScoresController {
@@ -15,19 +16,26 @@ export class ScoresController {
 
     public static $inject = [
         '$scope',
-        'ngTableParams',
         'ScoresService',
         '$location'
     ];
 
     constructor(private $scope:IScoresScope,
-                private ngTableParams:any,
                 private scoresService:Services.ScoresService,
                 private $location:ng.ILocationService) {
         $scope.vm = this;
         var that = this;
 
         this.reloadScores(this);
+
+        $scope.query = {
+            filter: '',
+            order: 'date',
+            limit: 5,
+            page: 1
+        };
+
+        $scope.selectedRow = [];
     }
 
     public addScore():void {
@@ -37,12 +45,6 @@ export class ScoresController {
     public reloadScores(that: ScoresController): void {
         that.scoresService.getAllScores().success(function (data) {
             that.$scope.data = data;
-
-            that.tableParams = new that.ngTableParams({
-                count: 50
-            }, {
-                data: that.$scope.data
-            });
         }).error(function () {
             console.log('Error when receiving data!');
         });

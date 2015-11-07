@@ -16,7 +16,9 @@ declare var moment:moment.MomentStatic;
 
 'use strict';
 
-export var frontend:ng.IModule = angular.module('frontend', ['ngAnimate', 'ngCookies', 'ngTouch', 'ngSanitize', 'ngMessages', 'ngAria', 'ngResource', 'ui.router', 'ngMaterial', 'toastr', 'ngTable'])
+export var frontend:ng.IModule = angular.module('frontend',
+    ['ngAnimate', 'ngCookies', 'ngTouch', 'ngSanitize', 'ngMessages',
+        'ngAria', 'ngResource', 'ui.router', 'ngMaterial', 'toastr', 'md.data.table'])
     .constant('moment', moment)
     .constant('_', _)
     .config(config)
