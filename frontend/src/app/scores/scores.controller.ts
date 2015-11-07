@@ -47,6 +47,12 @@ export class ScoresController {
 
     public reloadScores(that: ScoresController): void {
         that.scoresService.getAllScores().success(function (data) {
+            _.forEach(data, function (matchData: Model.MatchScoreDTO) {
+                matchData.homeTeamWon = matchData.homeTeamScore.score > matchData.guestTeamScore.score;
+                matchData.guestTeamWon = matchData.guestTeamScore.score > matchData.homeTeamScore.score;
+                matchData.isDraw = !matchData.homeTeamWon && !matchData.guestTeamWon;
+            });
+
             that.$scope.data = data;
         }).error(function () {
             console.log('Error when receiving data!');

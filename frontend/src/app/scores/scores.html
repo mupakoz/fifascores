@@ -14,21 +14,21 @@
             <thead md-order="query.order">
             <tr>
                 <th name="Data" order-by="date"></th>
-                <th name="Gospodarze"></th>
                 <th name="Drużyna 1"></th>
+                <th name="Gospodarze"></th>
                 <th name="Wynik"></th>
-                <th name="Drużyna 2"></th>
                 <th name="Goście"></th>
+                <th name="Drużyna 2"></th>
             </tr>
             </thead>
             <tbody>
             <tr ng-repeat="matchData in data | orderBy: query.order | limitTo: query.limit: (query.page - 1) * query.limit">
                 <td>{{matchData.date | date:'dd.MM.yyyy HH:mm'}}</td>
-                <td>{{matchData.homeTeamScore.team}}</td>
-                <td><span data-ng-repeat="player in matchData.homeTeamScore.players">{{player}}<span data-ng-if="!$last">,</span> </span></td>
-                <td>{{matchData.homeTeamScore.score}}-{{matchData.guestTeamScore.score}}</td>
-                <td><span data-ng-repeat="player in matchData.guestTeamScore.players">{{player}}<span data-ng-if="!$last">,</span> </span></td>
-                <td>{{matchData.guestTeamScore.team}}</td>
+                <td data-ng-class="{ 'bold': matchData.homeTeamWon }">{{matchData.homeTeamScore.team}}</td>
+                <td data-ng-class="{ 'bold': matchData.homeTeamWon }"><span data-ng-repeat="player in matchData.homeTeamScore.players">{{player}}<span data-ng-if="!$last">,</span> </span></td>
+                <td><span data-ng-class="{ 'bold': matchData.homeTeamWon }">{{matchData.homeTeamScore.score}}</span>-<span data-ng-class="{ bold: matchData.guestTeamWon }">{{matchData.guestTeamScore.score}}</span></td>
+                <td data-ng-class="{ 'bold': matchData.guestTeamWon }"><span data-ng-repeat="player in matchData.guestTeamScore.players">{{player}}<span data-ng-if="!$last">,</span> </span></td>
+                <td data-ng-class="{ 'bold': matchData.guestTeamWon }">{{matchData.guestTeamScore.team}}</td>
             </tr>
             </tbody>
         </table>

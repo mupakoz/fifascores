@@ -5,29 +5,32 @@ export class TeamScoreDTO {
 }
 
 export class MatchScoreDTO {
-    id: string;
+    id:string;
     date:Date;
     homeTeamScore:TeamScoreDTO;
     guestTeamScore:TeamScoreDTO;
+    homeTeamWon:boolean;
+    guestTeamWon:boolean;
+    isDraw:boolean;
 }
 
 export class TableField {
-    title: string;
-    fieldPath: string;
-    type: string;
+    title:string;
+    fieldPath:string;
+    type:string;
 }
 
 export class AddScoreFormData {
-    date: Date;
-    score: string;
-    homeTeamPlayers: string;
-    homeTeamName: string;
-    guestTeamPlayers: string;
-    guestTeamName: string;
+    date:Date;
+    score:string;
+    homeTeamPlayers:string;
+    homeTeamName:string;
+    guestTeamPlayers:string;
+    guestTeamName:string;
 }
 
 export class PlayersAutocomplete {
-    selectedItem: any;
-    searchText: string;
+    selectedItem:any;
+    searchText:string;
 
 }
