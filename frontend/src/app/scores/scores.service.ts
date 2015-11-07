@@ -1,12 +1,13 @@
 import Model = require('./scores.model')
 
 export class ScoresService {
-    static $inject = ['$resource', '$http', '$location'];
+    static $inject = ['$resource', '$http', '$location', 'Notification'];
 
     constructor(// Add the parameter and type definition.
                 public $resource:ng.IResourceService,
                 public $http:ng.IHttpService,
-                public $location:ng.ILocationService) {
+                public $location:ng.ILocationService,
+                public Notification:any) {
     }
 
     public addScore(dto:Model.AddScoreFormData):void {
@@ -18,6 +19,7 @@ export class ScoresService {
             headers: {'Content-Type': 'application/json'}
         }).success(function (data, status, headers, config) {
             console.log('Score added!');
+            that.Notification.success('Wynik został dodany!');
             that.$location.path('/scores');
         }).error(function (data, status, headers, config) {
             console.log('Error when adding score!');

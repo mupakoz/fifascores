@@ -19,13 +19,15 @@ export class ScoresController {
         '$scope',
         'ScoresService',
         '$location',
-        '$mdDialog'
+        '$mdDialog',
+        'Notification'
     ];
 
     constructor(private $scope:IScoresScope,
                 private scoresService:Services.ScoresService,
                 private $location:ng.ILocationService,
-                private $mdDialog) {
+                private $mdDialog,
+                public Notification:any) {
         $scope.vm = this;
         var that = this;
 
@@ -82,6 +84,7 @@ export class ScoresController {
         var deleteScorePromise = this.scoresService.delete(id);
         deleteScorePromise.success(function (data, status, headers, config) {
             console.log('Score deleted!');
+            that.Notification.success('Wynik usunięty!');
             that.reloadScores(that);
         }).error(function (data, status, headers, config) {
             console.log('Error when deleting score!');
