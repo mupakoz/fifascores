@@ -30,7 +30,7 @@
                 <td><span data-ng-class="{ 'bold': matchData.homeTeamWon }">{{matchData.homeTeamScore.score}}</span>-<span data-ng-class="{ bold: matchData.guestTeamWon }">{{matchData.guestTeamScore.score}}</span></td>
                 <td data-ng-class="{ 'bold': matchData.guestTeamWon }"><span data-ng-repeat="player in matchData.guestTeamScore.players">{{player}}<span data-ng-if="!$last">,</span> </span></td>
                 <td data-ng-class="{ 'bold': matchData.guestTeamWon }">{{matchData.guestTeamScore.team}}</td>
-                <td><i class="fa fa-times" data-ng-click="vm.delete(matchData.id)">X</i></td>
+                <td><i class="fa fa-times" data-ng-click="vm.delete(matchData.id)"></i></td>
             </tr>
             </tbody>
         </table>
