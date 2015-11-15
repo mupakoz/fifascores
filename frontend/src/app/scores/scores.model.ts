@@ -14,12 +14,6 @@ export class MatchScoreDTO {
     isDraw:boolean;
 }
 
-export class TableField {
-    title:string;
-    fieldPath:string;
-    type:string;
-}
-
 export class AddScoreFormData {
     date:Date;
     score:string;

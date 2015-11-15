@@ -1,0 +1,38 @@
+<md-toolbar layout="row" class="md-whiteframe-z1 site-content-toolbar">
+    <div class="md-toolbar-tools">
+        <md-button class="menu" hide-gt-sm ng-click="al.toggleList()" aria-label="Show menu">
+            <md-icon md-svg-icon="menu"></md-icon>
+        </md-button>
+        <h1>Tabela</h1>
+    </div>
+</md-toolbar>
+
+<md-content flex>
+    <md-data-table-container>
+        <table class="md-primary" md-data-table>
+            <thead md-order="query.order">
+            <tr>
+                <th name="Gracz"></th>
+                <th name="M" order-by="matches"></th>
+                <th name="Z" order-by="won"></th>
+                <th name="R" order-by="draw"></th>
+                <th name="P" order-by="lost"></th>
+                <th name="B"></th>
+                <th name="P" order-by="points"></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr ng-repeat="playerRow in tableData | orderBy: query.order | limitTo: query.limit: (query.page - 1) * query.limit">
+                <td>{{ ::playerRow.nickname }}</td>
+                <td>{{ ::playerRow.matches }}</td>
+                <td>{{ ::playerRow.won }}</td>
+                <td>{{ ::playerRow.draw }}</td>
+                <td>{{ ::playerRow.lost }}</td>
+                <td>{{ ::playerRow.goalsDiff.for }}:{{ ::playerRow.goalsDiff.against }}</td>
+                <td>{{ ::playerRow.points }}</td>
+            </tr>
+            </tbody>
+        </table>
+    </md-data-table-container>
+    <md-data-table-pagination md-label="paginationLabel" md-limit="query.limit" md-page="query.page" md-total="{{tableData.length}}"></md-data-table-pagination>
+</md-content>

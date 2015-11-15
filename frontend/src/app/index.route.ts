@@ -22,6 +22,11 @@ export function routerConfig($stateProvider:ng.ui.IStateProvider, $urlRouterProv
             url: '/scores/add',
             templateUrl: 'app/scores/add/addScore.html',
             controller: 'AddScoreController'
+        })
+        .state('table', {
+            url: '/table',
+            templateUrl: 'app/table/table.html',
+            controller: 'TableController'
         });
 
     $urlRouterProvider.otherwise('/scores');

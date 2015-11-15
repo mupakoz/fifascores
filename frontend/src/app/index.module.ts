@@ -10,6 +10,8 @@ import { PlayersService } from './players/players.service';
 import { ScoresController } from './scores/scores.controller';
 import { AddScoreController } from './scores/add/addScore.controller';
 import { ScoresService } from './scores/scores.service';
+import { TableController } from './table/table.controller';
+import { TableService } from './table/table.service';
 
 declare var moment:moment.MomentStatic;
 
@@ -30,5 +32,7 @@ export var frontend:ng.IModule = angular.module('frontend',
     .service('PlayersService', PlayersService)
     .controller('ScoresController', ScoresController)
     .controller('AddScoreController', AddScoreController)
-    .service('ScoresService', ScoresService);
+    .service('ScoresService', ScoresService)
+    .controller('TableController', TableController)
+    .service('TableService', TableService);
 

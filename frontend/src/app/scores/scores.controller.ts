@@ -3,7 +3,6 @@ import Services = require('./scores.service')
 
 export interface IScoresScope extends ng.IScope {
     data: Model.MatchScoreDTO[];
-    fields: Model.TableField[];
     firstNameTest: string;
     vm: ScoresController;
     query: any;
