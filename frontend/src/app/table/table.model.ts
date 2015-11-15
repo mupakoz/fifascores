@@ -12,6 +12,8 @@ export class PlayerTableRowDTO {
     goalsDiff: GoalsDiffDTO;
     pointsPerGame: number;
     goalsPerGame: number;
+    lostPerGame: number;
+    goalsPerGameDifference: number;
 }
 
 export class GoalsDiffDTO {
