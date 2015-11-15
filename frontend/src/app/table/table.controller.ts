@@ -19,7 +19,9 @@ export class TableController {
                 private tableService:Services.TableService) {
         $scope.vm = this;
 
-        $scope.tableData = tableService.getTableData().playerRows;
+        tableService.getTableData().success(function (data) {
+            $scope.tableData = data.playerRows;
+        });
 
         $scope.query = {
             filter: '',
