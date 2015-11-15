@@ -24,5 +24,5 @@ export function routerConfig($stateProvider:ng.ui.IStateProvider, $urlRouterProv
             controller: 'AddScoreController'
         });
 
-    $urlRouterProvider.otherwise('/');
+    $urlRouterProvider.otherwise('/scores');
 }

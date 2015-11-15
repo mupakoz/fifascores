@@ -64,7 +64,6 @@ export class ScoresController {
     }
 
     public confirmDelete(ev,id:string):void {
-        // Appending dialog to document.body to cover sidenav in docs app
         var confirm = this.$mdDialog.confirm()
             .title('Potwierdź usunięcie wyniku')
             .content('Czy jesteś pewny że chcesz usunąć ten wynik?')
