@@ -25,11 +25,11 @@ object PlayerTableRowDTO {
     val lost = if (goalsDiff.scored < goalsDiff.against) 1 else 0
     val points = if (won == 1) 3 else if (draw == 1) 1 else 0
 
-    PlayerTableRowDTO(player, 1, won, draw, lost, points, goalsDiff)
+    PlayerTableRowDTO(player, 1, won, draw, lost, points, goalsDiff, points)
   }
 
   def empty(nickname: String): PlayerTableRowDTO = {
-    PlayerTableRowDTO(nickname, 0, 0, 0, 0, 0, GoalsDiffDTO(0, 0))
+    PlayerTableRowDTO(nickname, 0, 0, 0, 0, 0, GoalsDiffDTO(0, 0), 0)
   }
 }
 
@@ -40,7 +40,8 @@ case class PlayerTableRowDTO(
                               draw: Int,
                               lost: Int,
                               points: Int,
-                              goalsDiff: GoalsDiffDTO
+                              goalsDiff: GoalsDiffDTO,
+                              pointsPerGame: Double
                               ) {
   def +(rowToAdd: PlayerTableRowDTO): PlayerTableRowDTO = {
     PlayerTableRowDTO(nickname,
@@ -49,7 +50,8 @@ case class PlayerTableRowDTO(
       draw + rowToAdd.draw,
       lost + rowToAdd.lost,
       points + rowToAdd.points,
-      goalsDiff + rowToAdd.goalsDiff)
+      goalsDiff + rowToAdd.goalsDiff,
+      (points + rowToAdd.points).toDouble/(matches + rowToAdd.matches))
   }
 }
 

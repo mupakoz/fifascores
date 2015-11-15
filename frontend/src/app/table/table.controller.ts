@@ -25,7 +25,7 @@ export class TableController {
 
         $scope.query = {
             filter: '',
-            order: '-points',
+            order: '-pointsPerGame',
             limit: 10,
             page: 1
         };
