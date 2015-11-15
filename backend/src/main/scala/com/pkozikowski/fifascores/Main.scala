@@ -20,6 +20,9 @@ trait Protocols extends DefaultJsonProtocol {
   implicit val scoreFormat = jsonFormat4(ScoreDTO)
   implicit val playerFormat = jsonFormat2(PlayerDTO)
   implicit val newPlayerFormat = jsonFormat1(NewPlayerDTO)
+  implicit val goalsDiffFormat = jsonFormat2(GoalsDiffDTO)
+  implicit val playerRowFormat = jsonFormat7(PlayerTableRowDTO.apply)
+  implicit val tableFormat = jsonFormat1(TableDTO)
 }
 
 object Main extends App with Protocols {
@@ -76,6 +79,13 @@ object Main extends App with Protocols {
               complete(200, "OK")
             }
           }
+      } ~
+      pathPrefix("table") {
+        get {
+          complete {
+            TableDAO.getTable()
+          }
+        }
       }
   } ~
     getFromResourceDirectory("webapp") ~

@@ -13,6 +13,6 @@ export class PlayerTableRowDTO {
 }
 
 export class GoalsDiffDTO {
-    for: number;
+    scored: number;
     against: number;
 }

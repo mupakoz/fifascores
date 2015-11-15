@@ -1,10 +1,40 @@
 package com.pkozikowski.fifascores.models
 
 import com.mongodb.casbah.Imports.ObjectId
+import com.pkozikowski.fifascores.models.MatchResult.MatchResult
 
-case class TeamScore(players: Seq[String], team: String, score: Int)
+import scala.collection.mutable
 
-case class Score(_id: ObjectId = new ObjectId, date: String, homeTeamScore: TeamScore, guestTeamScore: TeamScore)
+object MatchResult extends Enumeration {
+  type MatchResult = Value
+  val HomeTeamWon, GuestTeamWon, Draw = Value
+}
+
+object PlayerType extends Enumeration {
+  type PlayerType = Value
+  val Home, Guest = Value
+}
+
+case class TeamScore(
+                      players: Seq[String],
+                      team: String,
+                      score: Int)
+
+case class Score(
+                  _id: ObjectId = new ObjectId,
+                  date: String,
+                  homeTeamScore: TeamScore,
+                  guestTeamScore: TeamScore) {
+  lazy val result: MatchResult = {
+    if (homeTeamScore.score > guestTeamScore.score) {
+      MatchResult.HomeTeamWon
+    } else if (homeTeamScore.score == guestTeamScore.score) {
+      MatchResult.GuestTeamWon
+    } else {
+      MatchResult.Draw
+    }
+  }
+}
 
 case class ScoreDTO(id: String, date: String, homeTeamScore: TeamScore, guestTeamScore: TeamScore) {
   def this(score: Score) = this(score._id.toString, score.date, score.homeTeamScore, score.guestTeamScore)
