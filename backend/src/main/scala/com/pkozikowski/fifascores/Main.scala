@@ -21,7 +21,7 @@ trait Protocols extends DefaultJsonProtocol {
   implicit val playerFormat = jsonFormat2(PlayerDTO)
   implicit val newPlayerFormat = jsonFormat1(NewPlayerDTO)
   implicit val goalsDiffFormat = jsonFormat2(GoalsDiffDTO)
-  implicit val playerRowFormat = jsonFormat8(PlayerTableRowDTO.apply)
+  implicit val playerRowFormat = jsonFormat9(PlayerTableRowDTO.apply)
   implicit val tableFormat = jsonFormat1(TableDTO)
 }
 

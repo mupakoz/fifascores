@@ -18,6 +18,7 @@
                 <th name="R" order-by="draw"></th>
                 <th name="P" order-by="lost"></th>
                 <th name="B"></th>
+                <th name="B/M" order-by="goalsPerGame"></th>
                 <th name="PKT" order-by="points"></th>
                 <th name="PKT/M" order-by="pointsPerGame"></th>
             </tr>
@@ -30,6 +31,7 @@
                 <td>{{ ::playerRow.draw }}</td>
                 <td>{{ ::playerRow.lost }}</td>
                 <td>{{ ::playerRow.goalsDiff.scored }}:{{ ::playerRow.goalsDiff.against }}</td>
+                <td>{{ ::playerRow.goalsPerGame | number:2 }}</td>
                 <td>{{ ::playerRow.points }}</td>
                 <td>{{ ::playerRow.pointsPerGame | number:2 }}</td>
             </tr>
