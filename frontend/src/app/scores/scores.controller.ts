@@ -32,6 +32,7 @@ export class ScoresController {
 
         this.reloadScores(this);
 
+
         $scope.query = {
             filter: '',
             order: '-date',

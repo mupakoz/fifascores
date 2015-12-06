@@ -23,8 +23,7 @@ export class AddScoreFormData {
     guestTeamName:string;
 }
 
-export class PlayersAutocomplete {
+export class Autocomplete {
     selectedItem:any;
     searchText:string;
-
 }

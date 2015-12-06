@@ -6,13 +6,17 @@ import PlayersModels = require('./../../players/players.model')
 export interface IAddScoreScope extends ng.IScope {
     vm: AddScoreController;
     formData: Model.AddScoreFormData;
-    guestPlayers: Model.PlayersAutocomplete;
+    guestPlayers: Model.Autocomplete;
+    homeTeamAutocomplete: Model.Autocomplete;
+    guestTeamAutocomplete: Model.Autocomplete;
+    //homeTeamAutocomplete: Model.Autocomplete;
 }
 
 export class AddScoreController {
 
     public tableParams:any;
     public allPlayers:PlayersModels.PlayerDTO[];
+    private teams: string[];
 
     public static $inject = [
         '$scope',
@@ -35,10 +39,18 @@ export class AddScoreController {
             guestTeamName: undefined
         };
 
+        this.loadDictionaries();
+    }
+
+    private loadDictionaries(): void {
         var that:AddScoreController = this;
-        playersService.getAllPlayers().success(function (data:PlayerDTO[]) {
+
+        this.playersService.getAllPlayers().success(function (data:PlayerDTO[]) {
             that.allPlayers = data;
-            console.log(data);
+        });
+
+        this.scoresService.getTeams().success(function (teams:string[]) {
+            that.teams = teams;
         });
     }
 
@@ -51,6 +63,18 @@ export class AddScoreController {
 
     private nicknameExtractor(player: PlayersModels.PlayerDTO): string {
         return player.nickname;
+    }
+
+    public teamsQuerySearch(query:string):string[] {
+        var results = query ? this.teams.filter(this.createTeamFilterFor(query)) : [];
+        return results;
+    }
+
+    private createTeamFilterFor(query: string) {
+        var lowercaseQuery = angular.lowercase(query);
+        return function filterFn(team: string) {
+            return (angular.lowercase(team).indexOf(lowercaseQuery) !== -1);
+        };
     }
 
     public querySearch(query:string):PlayersModels.PlayerDTO[] {

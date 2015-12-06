@@ -30,7 +30,7 @@ export class ScoresService {
         return this.$http({
             url: '/api/scores/' + id,
             method: "DELETE"
-        })
+        });
     }
 
     public
@@ -38,6 +38,13 @@ export class ScoresService {
         return this.$http({
             url: '/api/scores',
             method: "GET"
-        })
+        });
+    }
+
+    public getTeams() {
+        return this.$http({
+            url: '/api/teams',
+            method: "GET"
+        });
     }
 }

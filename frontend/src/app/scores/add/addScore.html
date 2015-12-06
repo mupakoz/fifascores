@@ -16,13 +16,18 @@
         <md-datepicker ng-model="formData.date" md-placeholder="Enter date"></md-datepicker>
     </div>
     <div layout layout-sm="column">
-        <md-input-container flex>
-            <label>Nazwa pierwszej drużyny</label>
-            <input ng-model="formData.homeTeamName">
-        </md-input-container>
-        <md-input-container flex>
-            <label>Gracze (oddzieleni przecinkiem)</label>
-            <md-chips ng-model="formData.homeTeamPlayers" md-autocomplete-snap md-require-match="true">
+        <md-autocomplete flex required
+                         md-selected-item="formData.homeTeamName"
+                         md-search-text="homeTeamAutocomplete.searchText"
+                         md-items="team in vm.teamsQuerySearch(homeTeamAutocomplete.searchText)"
+                         md-item-text="team"
+                         md-min-length="0"
+                         md-floating-label="Nazwa pierwszej drużyny">
+            <md-item-template>
+                <span md-highlight-text="homeTeamAutocomplete.searchText">{{team}}</span>
+            </md-item-template>
+        </md-autocomplete>
+            <md-chips flex ng-model="formData.homeTeamPlayers" md-autocomplete-snap md-require-match="true">
                 <md-autocomplete
                         md-selected-item="guestPlayers.selectedItem"
                         md-search-text="guestPlayers.searchText"
@@ -37,16 +42,20 @@
                     </span>
                 </md-chip-template>
             </md-chips>
-        </md-input-container>
     </div>
     <div layout layout-sm="column">
-        <md-input-container flex>
-            <label>Nazwa drugiej drużyny</label>
-            <input ng-model="formData.guestTeamName">
-        </md-input-container>
-        <md-input-container flex>
-            <label>Gracze (oddzieleni przecinkiem)</label>
-            <md-chips ng-model="formData.guestTeamPlayers" md-autocomplete-snap md-require-match="true">
+        <md-autocomplete flex required
+                         md-selected-item="formData.guestTeamName"
+                         md-search-text="guestTeamAutocomplete.searchText"
+                         md-items="team in vm.teamsQuerySearch(guestTeamAutocomplete.searchText)"
+                         md-item-text="team"
+                         md-min-length="0"
+                         md-floating-label="Nazwa drugiej drużyny">
+            <md-item-template>
+                <span md-highlight-text="guestTeamAutocomplete.searchText">{{team}}</span>
+            </md-item-template>
+        </md-autocomplete>
+            <md-chips ng-model="formData.guestTeamPlayers" flex md-autocomplete-snap md-require-match="true" md-floating-label="Gracze">
                 <md-autocomplete
                         md-selected-item="guestPlayers.selectedItem"
                         md-search-text="guestPlayers.searchText"
@@ -61,7 +70,6 @@
                     </span>
                 </md-chip-template>
             </md-chips>
-        </md-input-container>
     </div>
     <div layout layout-sm="column">
         <md-button class="md-raised md-primary" data-ng-click="vm.addScore()" flex>Dodaj wynik</md-button>
