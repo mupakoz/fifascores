@@ -86,6 +86,13 @@ object Main extends App with Protocols {
             TableDAO.getTable()
           }
         }
+      } ~
+      pathPrefix("teams") {
+        get {
+          complete {
+            ScoreDAO.getTeams()
+          }
+        }
       }
   } ~
     getFromResourceDirectory("webapp") ~
