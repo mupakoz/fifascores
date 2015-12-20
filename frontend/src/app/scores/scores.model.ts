@@ -17,9 +17,9 @@ export class MatchScoreDTO {
 export class AddScoreFormData {
     date:Date;
     score:string;
-    homeTeamPlayers:string;
+    homeTeamPlayers:string[];
     homeTeamName:string;
-    guestTeamPlayers:string;
+    guestTeamPlayers:string[];
     guestTeamName:string;
 }
 

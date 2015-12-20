@@ -9,7 +9,6 @@ export interface IAddScoreScope extends ng.IScope {
     guestPlayers: Model.Autocomplete;
     homeTeamAutocomplete: Model.Autocomplete;
     guestTeamAutocomplete: Model.Autocomplete;
-    //homeTeamAutocomplete: Model.Autocomplete;
 }
 
 export class AddScoreController {
@@ -30,14 +29,10 @@ export class AddScoreController {
                 private $location:ng.ILocationService,
                 private playersService:PlayersServices.PlayersService) {
         $scope.vm = this;
-        $scope.formData = {
-            date: new Date(),
-            score: undefined,
-            homeTeamPlayers: [],
-            homeTeamName: undefined,
-            guestTeamPlayers: [],
-            guestTeamName: undefined
-        };
+        $scope.formData = new Model.AddScoreFormData();
+        $scope.formData.date = new Date();
+        $scope.formData.homeTeamPlayers = [];
+        $scope.formData.guestTeamPlayers = [];
 
         this.loadDictionaries();
     }
@@ -45,7 +40,7 @@ export class AddScoreController {
     private loadDictionaries(): void {
         var that:AddScoreController = this;
 
-        this.playersService.getAllPlayers().success(function (data:PlayerDTO[]) {
+        this.playersService.getAllPlayers().success(function (data:PlayersModels.PlayerDTO[]) {
             that.allPlayers = data;
         });
 

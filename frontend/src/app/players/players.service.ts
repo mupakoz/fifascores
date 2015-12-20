@@ -9,7 +9,7 @@ export class PlayersService {
                 public $location:ng.ILocationService) {
     }
 
-    public addPlayer(dto:Model.NewPlayerDTO):void {
+    public addPlayer(dto:Model.NewPlayerDTO):ng.HttpPromise {
         var that = this;
         return this.$http({
             url: '/api/players',

@@ -36,7 +36,7 @@ export class PlayersController {
         addPlayerPromise.success(function (data, status, headers, config) {
             console.log('Player added!');
             that.reloadPlayers(that);
-            that.$scope.newPlayer = {};
+            that.$scope.newPlayer = new Model.NewPlayerDTO();
         }).error(function (data, status, headers, config) {
             console.log('Error when adding player!');
         });

@@ -1,4 +1,5 @@
 import Model = require('./scores.model')
+import TableModel = require('./../table/table.model')
 import Services = require('./scores.service')
 
 export interface IScoresScope extends ng.IScope {
@@ -7,7 +8,7 @@ export interface IScoresScope extends ng.IScope {
     vm: ScoresController;
     query: any;
     selectedRow: any;
-    paginationLabel: string;
+    paginationLabel: TableModel.PaginationLabel;
 }
 
 export class ScoresController {

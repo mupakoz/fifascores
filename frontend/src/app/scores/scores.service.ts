@@ -1,10 +1,9 @@
 import Model = require('./scores.model')
 
 export class ScoresService {
-    static $inject = ['$resource', '$http', '$location', 'Notification'];
+    static $inject = ['$http', '$location', 'Notification'];
 
-    constructor(// Add the parameter and type definition.
-                public $resource:ng.IResourceService,
+    constructor(
                 public $http:ng.IHttpService,
                 public $location:ng.ILocationService,
                 public Notification:any) {

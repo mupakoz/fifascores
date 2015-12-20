@@ -5,7 +5,7 @@ export interface ITableScope extends ng.IScope {
     vm: TableController;
     query: any;
     selectedRow: any;
-    paginationLabel: string;
+    paginationLabel: Model.PaginationLabel;
     tableData: Model.PlayerTableRowDTO[];
 }
 

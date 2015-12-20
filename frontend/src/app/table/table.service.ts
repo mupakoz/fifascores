@@ -9,7 +9,7 @@ export class TableService {
                 public $location:ng.ILocationService) {
     }
 
-    public getTableData(): Model.TableDTO {
+    public getTableData(): ng.IHttpPromise<Model.TableDTO> {
         return this.$http({
             url: '/api/table',
             method: "GET"
