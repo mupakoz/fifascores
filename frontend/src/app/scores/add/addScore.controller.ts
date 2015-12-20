@@ -50,7 +50,8 @@ export class AddScoreController {
     }
 
     addScore():void {
-        console.log(this.allPlayers);
+        this.$scope.formData.homeTeamName = this.$scope.homeTeamAutocomplete.searchText;
+        this.$scope.formData.guestTeamName = this.$scope.guestTeamAutocomplete.searchText;
         this.$scope.formData.homeTeamPlayers = _.map(this.$scope.formData.homeTeamPlayers, this.nicknameExtractor);
         this.$scope.formData.guestTeamPlayers = _.map(this.$scope.formData.guestTeamPlayers, this.nicknameExtractor);
         this.scoresService.addScore(this.$scope.formData);
