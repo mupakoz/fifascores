@@ -8,4 +8,11 @@ export class ProfileService {
                 public $http:ng.IHttpService,
                 public $location:ng.ILocationService) {
     }
+
+    public getProfile(nickname: string) {
+        return this.$http({
+            url: '/api/profile/' + nickname,
+            method: "GET"
+        });
+    }
 }

@@ -5,6 +5,8 @@ export interface IProfileScope extends ng.IScope {
     vm: ProfileController;
     playerName: string;
     barData: any;
+    options: any;
+    data: Model.ProfileDTO;
 }
 
 export class ProfileController {
@@ -22,11 +24,24 @@ export class ProfileController {
 
         $scope.playerName = $stateParams.playerName;
 
-        $scope.barData = {
-            labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri'],
+        profileService.getProfile($scope.playerName).success(function (data: Model.ProfileDTO) {
+            that.$scope.data = data;
+            that.$scope.data.chartData = that.convertPointsToChart(data.pointsTable);
+        });
+    }
+
+    public convertPointsToChart(pointsTable:Model.ProfileChartPointDTO[]): Model.ChartData {
+        return {
+            labels: _.map(pointsTable, function (p: Model.ProfileChartPointDTO) {
+                var date = new Date(p.date);
+                var day = date.getDate();
+                var monthIndex = date.getMonth();
+                var year = date.getFullYear();
+                return day+"-"+monthIndex+"-"+year; 
+            }),
             series: [
-                [1, 3, 3, 2, 5]
+                _.map(pointsTable, function (p: Model.ProfileChartPointDTO) { return p.points})
             ]
-        };
+        }
     }
 }
