@@ -12,6 +12,7 @@ import com.typesafe.config.ConfigFactory
 class ScoreDAO extends SalatDAO[Score, ObjectId](collection = DBUtils.db("scores"))
 
 object ScoreDAO {
+  def getScoresForPlayer(nickname: String) = scoreDAO.find($or(MongoDBObject("homeTeamScore.players" -> nickname), MongoDBObject("guestTeamScore.players" -> nickname))).toList
 
 
   val scoreDAO = new ScoreDAO

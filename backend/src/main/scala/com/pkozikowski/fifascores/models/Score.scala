@@ -43,6 +43,17 @@ case class Score(
                   date: String,
                   homeTeamScore: TeamScore,
                   guestTeamScore: TeamScore) {
+  def getPlayerScore(nickname: String): Int = {
+    if (homeTeamScore.players.contains(nickname) && result == MatchResult.HomeTeamWon ||
+    guestTeamScore.players.contains(nickname) && result == MatchResult.GuestTeamWon) {
+      3
+    } else if (result == MatchResult.Draw) {
+      1
+    } else {
+      0
+    }
+  }
+
   lazy val result: MatchResult = {
     if (homeTeamScore.score > guestTeamScore.score) {
       MatchResult.HomeTeamWon
