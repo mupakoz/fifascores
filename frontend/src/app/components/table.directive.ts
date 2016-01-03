@@ -12,7 +12,7 @@ export interface IMyScope extends ng.IScope
 
 export function TableDirective():ng.IDirective {
     return {
-        templateUrl: '/app/components/table.directive.html',
+        templateUrl: 'app/components/table.directive.html',
         scope: {
             tableData: '='
         },
