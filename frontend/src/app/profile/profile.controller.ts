@@ -27,12 +27,6 @@ export class ProfileController {
         profileService.getProfile($scope.playerName).success(function (data: Model.ProfileDTO) {
             that.$scope.data = data;
             that.$scope.data.chartData = that.convertPointsToChart(data.pointsTable);
-            that.$scope.data.bestPartner = { nickname: 'Rogal', times: 5, pointsPerGame: 1.33 };
-            that.$scope.data.worstPartner = { nickname: 'Rogal', times: 5, pointsPerGame: 1.33 };
-            that.$scope.data.mostFrequentPartner = { nickname: 'Rogal', times: 5, pointsPerGame: 1.33 };
-            that.$scope.data.bestTeam = { teamName: 'Real Madryt', times: 3, pointsPerGame: 1.33 };
-            that.$scope.data.mostFrequentTeam = { teamName: 'Real Madryt', times: 3, pointsPerGame: 1.33 };
-            that.$scope.data.worstTeam = { teamName: 'Real Madryt', times: 3, pointsPerGame: 1.33 };
         });
     }
 

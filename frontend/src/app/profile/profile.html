@@ -13,34 +13,34 @@
         <div flex layout="column" class="profileValuesBox">
             <div flex class="label">Najlepszy współgracz</div>
             <div flex class="value">{{::data.bestPartner.nickname}}</div>
-            <div flex class="comment">Średnia {{::data.bestPartner.pointsPerGame}} w {{::data.bestPartner.times}} meczach.</div>
+            <div flex class="comment">Średnia {{::data.bestPartner.pointsPerGame | number:2 }} w {{::data.bestPartner.times}} meczach.</div>
         </div>
         <div flex layout="column" class="profileValuesBox">
             <div flex class="label">Najgorszy współgracz</div>
             <div flex class="value">{{::data.worstPartner.nickname}}</div>
-            <div flex class="comment">Średnia {{::data.worstPartner.pointsPerGame}} w {{::data.worstPartner.times}} meczach.</div>
+            <div flex class="comment">Średnia {{::data.worstPartner.pointsPerGame | number:2 }} w {{::data.worstPartner.times}} meczach.</div>
         </div>
         <div flex layout="column" class="profileValuesBox">
             <div flex class="label">Najczęstszy współgracz</div>
             <div flex class="value">{{::data.mostFrequentPartner.nickname}}</div>
-            <div flex class="comment">Średnia {{::data.mostFrequentPartner.pointsPerGame}} w {{::data.mostFrequentPartner.times}} meczach.</div>
+            <div flex class="comment">Średnia {{::data.mostFrequentPartner.pointsPerGame | number:2 }} w {{::data.mostFrequentPartner.times}} meczach.</div>
         </div>
     </div>
     <div layout="column" layout-gt-sm="row" class="margin-top-50">
         <div flex layout="column" class="profileValuesBox">
             <div flex class="label">Najlepsza drużyna</div>
             <div flex class="value">{{::data.bestTeam.teamName}}</div>
-            <div flex class="comment">Średnia {{::data.bestTeam.pointsPerGame}} w {{::data.bestTeam.times}} meczach.</div>
+            <div flex class="comment">Średnia {{::data.bestTeam.pointsPerGame | number:2 }} w {{::data.bestTeam.times}} meczach.</div>
         </div>
         <div flex layout="column" class="profileValuesBox">
             <div flex class="label">Najgorsza drużyna</div>
             <div flex class="value">{{::data.worstTeam.teamName}}</div>
-            <div flex class="comment">Średnia {{::data.worstTeam.pointsPerGame}} w {{::data.worstTeam.times}} meczach.</div>
+            <div flex class="comment">Średnia {{::data.worstTeam.pointsPerGame | number:2 }} w {{::data.worstTeam.times}} meczach.</div>
         </div>
         <div flex layout="column" class="profileValuesBox">
             <div flex class="label">Najczęstsza drużyna</div>
             <div flex class="value">{{::data.mostFrequentTeam.teamName}}</div>
-            <div flex class="comment">Średnia {{::data.mostFrequentTeam.pointsPerGame}} w {{::data.mostFrequentTeam.times}} meczach.</div>
+            <div flex class="comment">Średnia {{::data.mostFrequentTeam.pointsPerGame | number:2 }} w {{::data.mostFrequentTeam.times}} meczach.</div>
         </div>
     </div>
 </md-content>

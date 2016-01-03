@@ -20,6 +20,12 @@ object TeamScoreHelpers {
     Seq(teamScore.players.sorted.mkString(", "))
   else
     Seq()
+
+  def coPlayerExtractor(nickname:String) = (teamScore: TeamScore) => if (teamScore.players.contains(nickname)) {
+    teamScore.players.filterNot(p => p == nickname)
+  } else {
+    Seq()
+  }
 }
 
 case class TeamScore(

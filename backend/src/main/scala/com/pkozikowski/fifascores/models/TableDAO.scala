@@ -16,7 +16,7 @@ object TableDAO {
     calculateTable(allScores, TeamScoreHelpers.pairExtractor, ScoreHelpers.allTrueFilter)
   }
 
-  private def calculateTable(scores: Seq[Score], playersExtractor: TeamScore => Seq[String], scoreFilter: Score => Boolean): TableDTO = {
+  def calculateTable(scores: Seq[Score], playersExtractor: TeamScore => Seq[String], scoreFilter: Score => Boolean): TableDTO = {
     val tableHelper = new TableBuilder()
 
     scores
