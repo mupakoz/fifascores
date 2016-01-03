@@ -27,7 +27,12 @@ export function routerConfig($stateProvider:ng.ui.IStateProvider, $urlRouterProv
             url: '/table',
             templateUrl: 'app/table/table.html',
             controller: 'TableController'
-        });
+        })
+        .state('profile', {
+            url: '/profile/:playerName',
+            templateUrl: 'app/profile/profile.html',
+            controller: 'ProfileController'
+        });;
 
     $urlRouterProvider.otherwise('/scores');
 }
