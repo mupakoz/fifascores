@@ -3,9 +3,6 @@ import Services = require('./table.service')
 
 export interface ITableScope extends ng.IScope {
     vm: TableController;
-    query: any;
-    selectedRow: any;
-    paginationLabel: Model.PaginationLabel;
     tableData: Model.PlayerTableRowDTO[];
 }
 
@@ -22,16 +19,5 @@ export class TableController {
         tableService.getTableData().success(function (data) {
             $scope.tableData = data.playerRows;
         });
-
-        $scope.query = {
-            filter: '',
-            order: '-pointsPerGame',
-            limit: 10,
-            page: 1
-        };
-
-        $scope.selectedRow = [];
-
-        $scope.paginationLabel = { text: 'Wierszy na stronę:' };
     }
 }

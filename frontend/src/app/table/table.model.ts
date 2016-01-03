@@ -20,7 +20,3 @@ export class GoalsDiffDTO {
     scored: number;
     against: number;
 }
-
-export class PaginationLabel {
-    text: string;
-}

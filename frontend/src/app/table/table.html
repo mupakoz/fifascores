@@ -8,39 +8,12 @@
 </md-toolbar>
 
 <md-content flex>
-    <md-data-table-container>
-        <table class="md-primary" md-data-table>
-            <thead md-order="query.order">
-            <tr>
-                <th name="Gracz"></th>
-                <th name="M" order-by="matches"></th>
-                <th name="Z" order-by="won"></th>
-                <th name="R" order-by="draw"></th>
-                <th name="P" order-by="lost"></th>
-                <th name="B"></th>
-                <th name="+B/M" order-by="goalsPerGame"></th>
-                <th name="-B/M" order-by="lostPerGame"></th>
-                <th name="B/M" order-by="goalsPerGameDifference"></th>
-                <th name="PKT" order-by="points"></th>
-                <th name="PKT/M" order-by="pointsPerGame"></th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr ng-repeat="playerRow in tableData | orderBy: query.order | limitTo: query.limit: (query.page - 1) * query.limit">
-                <td>{{ ::playerRow.nickname }}</td>
-                <td>{{ ::playerRow.matches }}</td>
-                <td>{{ ::playerRow.won }}</td>
-                <td>{{ ::playerRow.draw }}</td>
-                <td>{{ ::playerRow.lost }}</td>
-                <td>{{ ::playerRow.goalsDiff.scored }}:{{ ::playerRow.goalsDiff.against }}</td>
-                <td>{{ ::playerRow.goalsPerGame | number:2 }}</td>
-                <td>{{ ::playerRow.lostPerGame | number:2 }}</td>
-                <td>{{ ::playerRow.goalsPerGameDifference | number:2 }}</td>
-                <td>{{ ::playerRow.points }}</td>
-                <td>{{ ::playerRow.pointsPerGame | number:2 }}</td>
-            </tr>
-            </tbody>
-        </table>
-    </md-data-table-container>
-    <md-data-table-pagination md-label="paginationLabel" md-limit="query.limit" md-page="query.page" md-total="{{tableData.length}}"></md-data-table-pagination>
+    <md-tabs md-dynamic-height md-border-bottom>
+        <md-tab label="ALL TIME">
+            <table-directive data-table-data="tableData"></table-directive>
+        </md-tab>
+        <md-tab label="PARY">
+            tu bedzie druga tabela
+        </md-tab>
+    </md-tabs>
 </md-content>

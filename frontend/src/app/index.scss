@@ -198,3 +198,11 @@ span.name {
 [x-ng-click] {
   cursor: pointer;
 }
+
+md-tabs.md-default-theme .md-tab, md-tabs .md-tab {
+  color: rgba(0,0,0,0.54) !important;
+}
+
+md-tabs .md-tab.md-active {
+  color: rgb(16,108,200) !important;
+}
