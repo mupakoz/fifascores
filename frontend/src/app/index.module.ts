@@ -21,7 +21,7 @@ declare var moment:moment.MomentStatic;
 
 export var frontend:ng.IModule = angular.module('frontend',
     ['ngAnimate', 'ngCookies', 'ngTouch', 'ngSanitize', 'ngMessages',
-        'ngAria', 'ngResource', 'ui.router', 'ngMaterial', 'toastr', 'md.data.table', 'ui-notification'])
+        'ngAria', 'ngResource', 'ui.router', 'ngMaterial', 'toastr', 'md.data.table', 'ui-notification', 'angular-chartist'])
     .constant('moment', moment)
     .constant('_', _)
     .config(config)

@@ -5,6 +5,7 @@
     "angular": "~1.4.2",
     "angular-animate": "~1.4.2",
     "angular-aria": "~1.4.2",
+    "angular-chartist.js": "~3.3.12",
     "angular-cookies": "~1.4.2",
     "angular-growl-v2": "~0.7.9",
     "angular-material": "~0.11.2",
