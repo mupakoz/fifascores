@@ -3,8 +3,6 @@ package com.pkozikowski.fifascores.models
 import com.mongodb.casbah.Imports.ObjectId
 import com.pkozikowski.fifascores.models.MatchResult.MatchResult
 
-import scala.collection.mutable
-
 object MatchResult extends Enumeration {
   type MatchResult = Value
   val HomeTeamWon, GuestTeamWon, Draw = Value
@@ -17,8 +15,9 @@ object PlayerType extends Enumeration {
 
 object TeamScoreHelpers {
   def singlePlayerExtractor = (teamScore: TeamScore) => teamScore.players
+
   def pairExtractor = (teamScore: TeamScore) => if (teamScore.players.length > 1)
-    Seq(teamScore.players.mkString(", "))
+    Seq(teamScore.players.sorted.mkString(", "))
   else
     Seq()
 }
@@ -29,10 +28,14 @@ case class TeamScore(
                       score: Int)
 
 object ScoreHelpers {
+
   import com.github.nscala_time.time.Imports._
 
   def allTrueFilter = (score: Score) => true
-  def thisMonthFilter = (score: Score) => DateTime.parse(score.date).monthOfYear() == DateTime.now().monthOfYear()
+
+  def thisMonthFilter = (score: Score) =>
+    DateTime.parse(score.date).getMonthOfYear == DateTime.now().getMonthOfYear &&
+      DateTime.parse(score.date).getYear == DateTime.now().getYear
 }
 
 case class Score(

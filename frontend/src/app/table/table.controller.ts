@@ -4,6 +4,8 @@ import Services = require('./table.service')
 export interface ITableScope extends ng.IScope {
     vm: TableController;
     tableData: Model.PlayerTableRowDTO[];
+    pairsTableData: Model.PlayerTableRowDTO[];
+    singlesMonthTableData: Model.PlayerTableRowDTO[];
 }
 
 export class TableController {
@@ -18,6 +20,14 @@ export class TableController {
 
         tableService.getTableData().success(function (data) {
             $scope.tableData = data.playerRows;
+        });
+
+        tableService.getPairsTableData().success(function (data) {
+            $scope.pairsTableData = data.playerRows;
+        });
+
+        tableService.getSinglesMonthTableData().success(function (data) {
+            $scope.singlesMonthTableData = data.playerRows;
         });
     }
 }

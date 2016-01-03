@@ -15,4 +15,18 @@ export class TableService {
             method: "GET"
         });
     }
+
+    public getPairsTableData(): ng.IHttpPromise<Model.TableDTO> {
+        return this.$http({
+            url: '/api/table/pairs',
+            method: "GET"
+        });
+    }
+
+    public getSinglesMonthTableData(): ng.IHttpPromise<Model.TableDTO> {
+        return this.$http({
+            url: '/api/table/single/month',
+            method: "GET"
+        });
+    }
 }
