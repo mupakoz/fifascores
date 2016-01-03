@@ -27,6 +27,12 @@ export class ProfileController {
         profileService.getProfile($scope.playerName).success(function (data: Model.ProfileDTO) {
             that.$scope.data = data;
             that.$scope.data.chartData = that.convertPointsToChart(data.pointsTable);
+            that.$scope.data.bestPartner = { nickname: 'Rogal', times: 5, pointsPerGame: 1.33 };
+            that.$scope.data.worstPartner = { nickname: 'Rogal', times: 5, pointsPerGame: 1.33 };
+            that.$scope.data.mostFrequentPartner = { nickname: 'Rogal', times: 5, pointsPerGame: 1.33 };
+            that.$scope.data.bestTeam = { teamName: 'Real Madryt', times: 3, pointsPerGame: 1.33 };
+            that.$scope.data.mostFrequentTeam = { teamName: 'Real Madryt', times: 3, pointsPerGame: 1.33 };
+            that.$scope.data.worstTeam = { teamName: 'Real Madryt', times: 3, pointsPerGame: 1.33 };
         });
     }
 
@@ -35,9 +41,9 @@ export class ProfileController {
             labels: _.map(pointsTable, function (p: Model.ProfileChartPointDTO) {
                 var date = new Date(p.date);
                 var day = date.getDate();
-                var monthIndex = date.getMonth();
-                var year = date.getFullYear();
-                return day+"-"+monthIndex+"-"+year; 
+                var monthIndex = date.getMonth()+1;
+                var year = date.getFullYear()-2000;
+                return day+"-"+monthIndex+"-"+year;
             }),
             series: [
                 _.map(pointsTable, function (p: Model.ProfileChartPointDTO) { return p.points})

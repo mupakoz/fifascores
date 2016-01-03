@@ -206,3 +206,27 @@ md-tabs.md-default-theme .md-tab, md-tabs .md-tab {
 md-tabs .md-tab.md-active {
   color: rgb(16,108,200) !important;
 }
+
+.profileValuesBox {
+  position: relative;
+}
+
+.profileValuesBox div.label {
+  color: #000;
+  text-align: left;
+}
+
+.profileValuesBox div.value {
+  text-align: center;
+  font-size: 1.6em;
+}
+
+.profileValuesBox div.comment {
+  text-align: center;
+  font-size: 0.8em;
+  color: #a3a3a3;
+}
+
+.margin-top-50 {
+  margin-top: 50px;
+}
