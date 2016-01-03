@@ -15,10 +15,25 @@ object PlayerType extends Enumeration {
   val Home, Guest = Value
 }
 
+object TeamScoreHelpers {
+  def singlePlayerExtractor = (teamScore: TeamScore) => teamScore.players
+  def pairExtractor = (teamScore: TeamScore) => if (teamScore.players.length > 1)
+    Seq(teamScore.players.mkString(", "))
+  else
+    Seq()
+}
+
 case class TeamScore(
                       players: Seq[String],
                       team: String,
                       score: Int)
+
+object ScoreHelpers {
+  import com.github.nscala_time.time.Imports._
+
+  def allTrueFilter = (score: Score) => true
+  def thisMonthFilter = (score: Score) => DateTime.parse(score.date).monthOfYear() == DateTime.now().monthOfYear()
+}
 
 case class Score(
                   _id: ObjectId = new ObjectId,

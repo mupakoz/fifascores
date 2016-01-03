@@ -1,6 +1,5 @@
 package com.pkozikowski.fifascores.models
 
-import com.pkozikowski.fifascores.models.MatchResult.MatchResult
 import com.pkozikowski.fifascores.models.PlayerType.PlayerType
 
 import scala.collection.mutable
@@ -22,18 +21,18 @@ class TableBuilder {
   }
 
   def addValuesForPlayer(player: String, score: Score, playerType: PlayerType) = {
-    val valuesToAdd:PlayerTableRowDTO = PlayerTableRowDTO.from(player, score, playerType)
+    val valuesToAdd: PlayerTableRowDTO = PlayerTableRowDTO.from(player, score, playerType)
     addValues(valuesToAdd)
   }
 
-  def addScore(score: Score) = {
+  def addScore(score: Score, playersExtractor: TeamScore => Seq[String]) = {
     val matchResult = score.result
 
-    score.homeTeamScore.players.foreach { player =>
-        addValuesForPlayer(player, score, PlayerType.Home)
+    playersExtractor(score.homeTeamScore).foreach { player =>
+      addValuesForPlayer(player, score, PlayerType.Home)
     }
 
-    score.guestTeamScore.players.foreach { player =>
+    playersExtractor(score.guestTeamScore).foreach { player =>
       addValuesForPlayer(player, score, PlayerType.Guest)
     }
   }

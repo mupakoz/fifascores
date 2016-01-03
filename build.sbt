@@ -19,7 +19,8 @@ lazy val libraries = {
     "com.typesafe.akka" %% "akka-http-spray-json-experimental"    % akkaStreamV,
     "org.scalatest"     %% "scalatest"                            % scalaTestV % "test",
     "com.novus"         %% "salat"                                % salatV,
-    "org.mongodb"       %% "casbah"                               % "2.8.2"
+    "org.mongodb"       %% "casbah"                               % "2.8.2",
+    "com.github.nscala-time" %% "nscala-time"                     % "2.6.0"
   )
 }
 

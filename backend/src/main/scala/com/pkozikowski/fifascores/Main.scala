@@ -51,7 +51,7 @@ object Main extends App with Protocols {
               ScoreDAO.allDtos()
             }
           } ~
-          path (Rest) { id =>
+          path(Rest) { id =>
             (delete) {
               ScoreDAO.delete(id)
               complete(200, "OK")
@@ -73,7 +73,7 @@ object Main extends App with Protocols {
               complete(201, "OK")
             }
           } ~
-          path (Rest) { id =>
+          path(Rest) { id =>
             (delete) {
               PlayerDAO.delete(id)
               complete(200, "OK")
@@ -81,6 +81,22 @@ object Main extends App with Protocols {
           }
       } ~
       pathPrefix("table") {
+        pathPrefix("pairs") {
+          get {
+            complete {
+              TableDAO.getPairsTable()
+            }
+          }
+        } ~
+        pathPrefix("single") {
+          path("month") {
+            get {
+              complete {
+                TableDAO.getMonthSingleTable()
+              }
+            }
+          }
+        } ~
         get {
           complete {
             TableDAO.getTable()
